@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"c:/Users/USER/Desktop/AccessControl/src/app/select/[type]\" \"c:/Users/USER/Desktop/AccessControl/src/app/checkin/[type]/[businessId]\" \"c:/Users/USER/Desktop/AccessControl/src/app/success\" \"c:/Users/USER/Desktop/AccessControl/src/app/dashboard\" \"c:/Users/USER/Desktop/AccessControl/src/components\" \"c:/Users/USER/Desktop/AccessControl/src/lib\" \"c:/Users/USER/Desktop/AccessControl/supabase\" && echo \"OK\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\USER\\Desktop\\AccessControl\\src\\app\\select"
+    ]
+  }
+}
