@@ -1,6 +1,6 @@
 export type VisitorType = "visitor" | "supplier";
 
-export interface Business {
+export type Business = {
   id: string;
   name: string;
   slug: string;
@@ -9,9 +9,9 @@ export interface Business {
   description: string | null;
   floor: string | null;
   created_at: string;
-}
+};
 
-export interface AccessLog {
+export type AccessLog = {
   id: string;
   business_id: string;
   visitor_type: VisitorType;
@@ -24,7 +24,7 @@ export interface AccessLog {
   entry_time: string;
   exit_time: string | null;
   created_at: string;
-}
+};
 
 export interface AccessLogWithBusiness extends AccessLog {
   business: Pick<Business, "id" | "name" | "logo_url" | "color"> | null;
@@ -40,6 +40,7 @@ export type Database = {
           created_at?: string;
         };
         Update: Partial<Business>;
+        Relationships: [];
       };
       access_logs: {
         Row: AccessLog;
@@ -50,11 +51,12 @@ export type Database = {
           exit_time?: string | null;
         };
         Update: Partial<AccessLog>;
+        Relationships: [];
       };
     };
-    Views: Record<string, never>;
-    Functions: Record<string, never>;
-    Enums: Record<string, never>;
+    Views: { [_ in never]: never };
+    Functions: { [_ in never]: never };
+    Enums: { [_ in never]: never };
   };
 };
 
