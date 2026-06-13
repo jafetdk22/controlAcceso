@@ -30,6 +30,51 @@ export async function getBusiness(id: string): Promise<Business | null> {
   return data;
 }
 
+/** Genera un slug url-safe a partir del nombre del negocio. */
+export function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/** Campos editables de un negocio (todo menos id y created_at). */
+export type BusinessInput = Omit<Business, "id" | "created_at">;
+
+export async function createBusiness(
+  input: Partial<BusinessInput> & { name: string }
+): Promise<Business> {
+  const slug = input.slug?.trim() || slugify(input.name);
+  const { data, error } = await supabase
+    .from("businesses")
+    .insert({ ...input, slug })
+    .select("*")
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function updateBusiness(
+  id: string,
+  patch: Partial<BusinessInput>
+): Promise<Business> {
+  const { data, error } = await supabase
+    .from("businesses")
+    .update(patch)
+    .eq("id", id)
+    .select("*")
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+export async function deleteBusiness(id: string): Promise<void> {
+  const { error } = await supabase.from("businesses").delete().eq("id", id);
+  if (error) throw error;
+}
+
 /* -------------------------------------------------------------------------- */
 /*  Access logs                                                               */
 /* -------------------------------------------------------------------------- */

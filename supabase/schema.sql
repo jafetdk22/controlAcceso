@@ -14,11 +14,25 @@ create table if not exists public.businesses (
   color       text default '#345196',
   description text,
   floor       text,
+  phone       text,
+  email       text,
+  address     text,
+  open_time   text,
+  close_time  text,
+  days        text,
+  active      boolean not null default true,
   created_at  timestamptz not null default now()
 );
 
 -- Migración para instalaciones previas
 alter table public.businesses add column if not exists floor text;
+alter table public.businesses add column if not exists phone text;
+alter table public.businesses add column if not exists email text;
+alter table public.businesses add column if not exists address text;
+alter table public.businesses add column if not exists open_time text;
+alter table public.businesses add column if not exists close_time text;
+alter table public.businesses add column if not exists days text;
+alter table public.businesses add column if not exists active boolean not null default true;
 
 create index if not exists idx_businesses_name on public.businesses (name);
 
@@ -58,6 +72,23 @@ drop policy if exists "access_logs_insert"   on public.access_logs;
 create policy "businesses_read_all"
   on public.businesses for select
   using (true);
+
+-- Escritura de negocios reservada a usuarios autenticados (panel admin)
+drop policy if exists "businesses_insert_auth" on public.businesses;
+drop policy if exists "businesses_update_auth" on public.businesses;
+drop policy if exists "businesses_delete_auth" on public.businesses;
+
+create policy "businesses_insert_auth"
+  on public.businesses for insert
+  to authenticated with check (true);
+
+create policy "businesses_update_auth"
+  on public.businesses for update
+  to authenticated using (true) with check (true);
+
+create policy "businesses_delete_auth"
+  on public.businesses for delete
+  to authenticated using (true);
 
 create policy "access_logs_read_all"
   on public.access_logs for select

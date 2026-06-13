@@ -8,6 +8,13 @@ export type Business = {
   color: string | null;
   description: string | null;
   floor: string | null;
+  phone: string | null;
+  email: string | null;
+  address: string | null;
+  open_time: string | null;
+  close_time: string | null;
+  days: string | null;
+  active: boolean;
   created_at: string;
 };
 
@@ -35,7 +42,9 @@ export type Database = {
     Tables: {
       businesses: {
         Row: Business;
-        Insert: Omit<Business, "id" | "created_at"> & {
+        Insert: Partial<Omit<Business, "id" | "created_at">> & {
+          name: string;
+          slug: string;
           id?: string;
           created_at?: string;
         };

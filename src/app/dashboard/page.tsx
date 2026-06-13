@@ -11,6 +11,7 @@ import {
   Loader2,
   LogOut,
   RefreshCw,
+  Store,
   TrendingUp,
   Truck,
   Users
@@ -164,6 +165,10 @@ export default function DashboardPage() {
               <RefreshCw className={cn("h-4 w-4", refreshing && "animate-spin")} />
               Actualizar
             </button>
+            <Link href="/dashboard/businesses" className="btn-secondary">
+              <Store className="h-4 w-4" />
+              Negocios
+            </Link>
             <button
               onClick={handleSignOut}
               className="btn-secondary"

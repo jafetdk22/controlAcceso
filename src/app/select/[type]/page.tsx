@@ -22,7 +22,7 @@ export default function SelectBusinessPage() {
     setLoading(true);
     listBusinesses()
       .then((data) => {
-        if (!cancelled) setBusinesses(data);
+        if (!cancelled) setBusinesses(data.filter((b) => b.active !== false));
       })
       .catch((e: unknown) => {
         if (!cancelled) setError(e instanceof Error ? e.message : "Error desconocido");
