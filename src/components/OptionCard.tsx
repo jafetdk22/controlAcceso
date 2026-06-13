@@ -30,7 +30,7 @@ export function OptionCard({
     <Link
       href={href}
       className={cn(
-        "group relative overflow-hidden rounded-[2rem] p-10 text-white shadow-glow transition",
+        "group relative block cursor-pointer overflow-hidden rounded-[2rem] p-10 text-white shadow-glow transition",
         "min-h-[360px] flex flex-col justify-between",
         "bg-gradient-to-br",
         gradient,
