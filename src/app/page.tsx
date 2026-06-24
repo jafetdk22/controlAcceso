@@ -30,7 +30,7 @@ export default function HomePage() {
         <footer className="mt-16 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} · Control de Acceso · Edificio Corporativo</p>
           <p className="font-mono uppercase tracking-widest">
-            v1.0 · supabase backend
+            v1.0 
           </p>
         </footer>
       </main>
